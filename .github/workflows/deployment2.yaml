@@ -1,7 +1,7 @@
-name: Deployment Exercise 1
+name: Deployment Exercise 1.1
 on: push
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -10,8 +10,22 @@ jobs:
         run: npm ci
       - name: Linting the code
         run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
       - name: Test the code
         run: npm run test
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
       - name: Build the code
         run: npm run build
       - name: Deploying code
